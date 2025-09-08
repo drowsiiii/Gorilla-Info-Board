@@ -100,3 +100,5 @@ Contributions are welcome and wanted! Please:
 ---
 
 **⚠️ Disclaimer**: This is a community-created mod and is not officially supported by Another Axiom. Use at your own risk and always follow the game's terms of service.
+
+# This product is not affiliated with Gorilla Tag or Another Axiom LLC and is not endorsed or otherwise sponsored by Another Axiom LLC. Portions of the materials contained herein are property of Another Axiom LLC. © 2021 Another Axiom LLC.
