@@ -3,11 +3,11 @@ hiiii
 
 A comprehensive information display mod for Gorilla Tag that shows real-time game statistics, player information, and system performance in an easy-to-read board format.
 
-<img width="1162" height="662" alt="image" src="https://github.com/user-attachments/assets/b290ee33-3281-450c-987a-097dd40cdc1c" />
+<img width="1135" height="610" alt="image" src="https://github.com/user-attachments/assets/1356c5c9-fe8c-4794-b4e5-1b252273b3c8" />
+
 
 
  how awsome!
-P.S - dont worry, the player id shown in all images is on a different account (oculus) which i did things to my oculus and now it doesnt work, so the player id is inactive 
 
 ## Features
 
@@ -22,7 +22,7 @@ P.S - dont worry, the player id shown in all images is on a different account (o
 - **Gamemode Detection**: Automatic detection of current gamemode
   - Casual, Infection, Hunt, Freeze Tag, Guardian, Paint Brawl, Ambush, Ghost
   - Modded lobby detection
-- **Player Info**: Your Player ID and color code
+- **Player Info**: Your TurnSpeed and color code
 
 <img width="1026" height="445" alt="image" src="https://github.com/user-attachments/assets/a756c070-0e32-45db-bad7-2ff407db480a" />
 
@@ -36,7 +36,7 @@ P.S - dont worry, the player id shown in all images is on a different account (o
 
 
 ### ⚡ **Performance Metrics (Page 3)**
-- **FPS Counter**: Real-time frame rate display
+- **Fast FPS(hz) Counter**: Real-time frame rate display
 - **Ping Display**: Network latency when connected
 - **Session Timer**: Hours, minutes, seconds, and milliseconds since start
 - **Cosmetics Counter**: Shows allowed vs disallowed cosmetics
@@ -46,7 +46,6 @@ P.S - dont worry, the player id shown in all images is on a different account (o
 
 ### 👥 **Player List (Page 4)**
 - Complete list of all players in the current room
-- Shows player names, master client status, and User IDs
 - Updates automatically when players join/leave
 
 <img width="1045" height="431" alt="image" src="https://github.com/user-attachments/assets/e7caa38b-7a22-42f9-9f07-252e83d0de60" />
@@ -102,3 +101,4 @@ Contributions are welcome and wanted! Please:
 **⚠️ Disclaimer**: This is a community-created mod and is not officially supported by Another Axiom. Use at your own risk and always follow the game's terms of service.
 
 # This product is not affiliated with Gorilla Tag or Another Axiom LLC and is not endorsed or otherwise sponsored by Another Axiom LLC. Portions of the materials contained herein are property of Another Axiom LLC. © 2021 Another Axiom LLC.
+
