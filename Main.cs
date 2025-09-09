@@ -14,16 +14,16 @@ using System.Reflection;
 using GorillaLocomotion;
 using GorillaNetworking;
 using Photon.Pun;
+using Photon.Pun.UtilityScripts;
 using TMPro;
 using UnityEngine.Animations.Rigging;
 using UnityEngine.UI;
+using UnityEngine.XR.Interaction.Toolkit;
+using Object = System.Object;
 
 namespace InfoBoard
 {
     [BepInPlugin(InfoBoard.Info.Guid, Name, InfoBoard.Info.Version)]
-
-    // notes: If your editing this code, dont remove ANY null checks unless you want the mod to give you what i call "The ice bug" funny bug dont try it, if you found a fix lmk @drowsiii_
-
     public class Main : BaseUnityPlugin
     {
         
@@ -74,8 +74,9 @@ namespace InfoBoard
 
 // shyt Stats
         private float sessionStartTime;
-        // shyt Asset Bundle
-// shyt Asset Bundle Loader Class thing
+        private GorillaSnapTurn snapturngtag; // ty whoever told me this ( idk i forgor) 
+        
+        // Asser Bundle Class Loader Thing
         public static AssetBundle LoadAssetBundle(string path)
         {
             Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(path);
@@ -84,7 +85,12 @@ namespace InfoBoard
             return bundle;
         }
 
-// Page 1
+// ==========================================
+// PAGE SYSTEM.
+// ==========================================
+
+       
+        // Page 1.
         void HidePage1()
         {
             if (MaxPlayers != null)
@@ -170,40 +176,32 @@ namespace InfoBoard
                 RoomHeadingTMP.enabled = true;
             }
         }
-
-// Page 2
-        void HidePage5()
+        
+        // Page 2
+        void HidePage2()
         {
-            if (CreditsTMP != null)
+            if (ModsHeadingTMP != null)
             {
-                CreditsTMP.enabled = false;
+                ModsHeadingTMP.enabled = false;
+            }
+            if (ModsListTMP != null)
+            {
+                ModsListTMP.enabled = false;
             }
         }
 
-        void ShowPage5()
+        void ShowPage2()
         {
-            if (CreditsTMP != null)
+            if (ModsHeadingTMP != null)
             {
-                CreditsTMP.enabled = true;
+                ModsHeadingTMP.enabled = true;
+            }
+            if (ModsListTMP != null)
+            {
+                ModsListTMP.enabled = true;
             }
         }
-
-        // READ:
-        // how the pages work, 
-        // basically you make a function for the pages so like showpage? and hide, then the next pge you should call for changing pages it make sure you change the max page number
-        // this is mainly for myself but if you see this DONT BREAK THE PAGES i love themm!! <3 - drowsiii and the non existent "vaaee"
-        public void NextPage() //  this took me too long and im procansating  
-        {
-            pagenumber += 1;
-            if (pagenumber > MaxPages) pagenumber = 1;
-            UpdatePages();
-            
-        }
-
-// ==========================================
-// PAGE 3 SYSTEM - Add these methods
-// ==========================================
-
+        
 // Page 3
         void HidePage3()
         {
@@ -259,7 +257,6 @@ namespace InfoBoard
             }
         }
         
-        // page fucking 4
         // Page 4
         void HidePage4()
         {
@@ -284,35 +281,32 @@ namespace InfoBoard
                 PlayerListTMP.enabled = true;
             }
         }
-        
-        
-        // Page 5
-        void HidePage2()
+// Page 5
+        void HidePage5()
         {
-            if (ModsHeadingTMP != null)
+            if (CreditsTMP != null)
             {
-                ModsHeadingTMP.enabled = false;
-            }
-            if (ModsListTMP != null)
-            {
-                ModsListTMP.enabled = false;
+                CreditsTMP.enabled = false;
             }
         }
 
-        void ShowPage2()
+        void ShowPage5()
         {
-            if (ModsHeadingTMP != null)
+            if (CreditsTMP != null)
             {
-                ModsHeadingTMP.enabled = true;
-            }
-            if (ModsListTMP != null)
-            {
-                ModsListTMP.enabled = true;
+                CreditsTMP.enabled = true;
             }
         }
         
-// ==========================================
-// ==========================================
+        // Next Page
+        public void NextPage() //  this took me too long and im procansating  
+        {
+            pagenumber += 1;
+            if (pagenumber > MaxPages) pagenumber = 1;
+            UpdatePages();
+            
+        }
+        
         public void UpdatePages()
         {
             HidePage1();
@@ -327,7 +321,7 @@ namespace InfoBoard
             else if (pagenumber == 5) ShowPage5(); // Add this
             newTextTMP.text = $"Current Page = {pagenumber}";
         }
-
+        
 
         private void OnGUI()
         {
@@ -341,6 +335,15 @@ namespace InfoBoard
 
             GUI.Label(new Rect(10f, 10f + 40f + 5f, 120f, 20f), "Page: " + pagenumber); // 
         }
+        
+        
+        
+// ==========================================
+// ==========================================
+        
+
+
+        
 
         private void Awake()
         {
@@ -591,7 +594,7 @@ namespace InfoBoard
             PlayerInfoHeading.transform.Rotate(0, 0, 0);
             GameObject NahIdPlayerId = new GameObject("PlayerID"); // Ice bug
             PlayeridTMP = NahIdPlayerId.AddComponent<TextMeshPro>();
-            PlayeridTMP.text = "<color=#FF4444>Player ID:</color> " + PhotonNetwork.LocalPlayer.UserId;
+            PlayeridTMP.text = "<color=#FF4444>Turn Speed:</color> " + PhotonNetwork.LocalPlayer.UserId;
             PlayeridTMP.font = GorillaTagger.Instance.offlineVRRig.playerText1.font;
             PlayeridTMP.fontSize = 2;
             PlayeridTMP.color = Color.white;
@@ -738,8 +741,7 @@ namespace InfoBoard
             ModsList.transform.Rotate(0, 0, 0);
             ModsListTMP.enabled = false;
 
-            Debug.Log("game initialized");
-
+            Debug.Log("game initialized"); snapturngtag = UnityEngine.Object.FindAnyObjectByType<GorillaSnapTurn>();
             // subscribe to join/leave room events
             NetworkSystem.Instance.OnMultiplayerStarted += JoinedRoom;
             NetworkSystem.Instance.OnReturnedToSinglePlayer += OnLeaveRoom;
@@ -774,7 +776,11 @@ namespace InfoBoard
                 RoomTMP.text = Status;
             if (PlayeridTMP != null && PhotonNetwork.LocalPlayer != null && PhotonNetwork.LocalPlayer.UserId != null)
             {
-                PlayeridTMP.text = "<color=#FF4444>Player ID:</color> " + PhotonNetwork.LocalPlayer.UserId;
+                var color1 = new Color(1f, 0.972f, 0.863f); 
+                string cornsilkHex = ColorUtility.ToHtmlStringRGB(color1);
+                PlayeridTMP.text = $"<color=#{cornsilkHex}>Turn Speed: {snapturngtag.turnSpeed}:</color>";
+
+
             }
 
             if (Connected) // welcome back old unc
@@ -818,9 +824,9 @@ namespace InfoBoard
                 MaxPlayers1 = playerCount + " / 10";
                 MaxPlayers.text = MaxPlayers1;
                 string PlayerListfrthistime = ""; // fuck
-                foreach (var player in PhotonNetwork.PlayerList)
+                foreach (var player in PhotonNetwork.PlayerList) // improve
                 {
-                    PlayerListfrthistime += $"\n Name: {player.NickName} <||> Master Client: {player.IsMasterClient} <||> User ID: {player.UserId}";
+                    PlayerListfrthistime += $"\n Name: {player.NickName} | {player.ActorNumber}"; // this is shit
                 }
                 PlayerListTMP.text = PlayerListfrthistime;
             }

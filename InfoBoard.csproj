@@ -292,6 +292,9 @@
 
     <ItemGroup>
       <None Remove="Assets\Boards.bundle" />
+    </ItemGroup>
+
+    <ItemGroup>
       <EmbeddedResource Include="Assets\Boards.bundle" />
     </ItemGroup>
 </Project>
