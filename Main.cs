@@ -15,6 +15,21 @@ using UnityEngine.UI; // tf
 using UnityEngine.XR.Interaction.Toolkit;
 using Object = System.Object; // tf
 
+
+/* All Credits:
+ --
+ Gorilla stats for the name font trick, ty.
+ anomynous.hi for helping with basically everything i didnt know
+ hansolomilleniumfalcon for trying to help but i ended up not using his methord (I believe it was for the gamemodes)
+ --
+ And thats it im pretty sure. if you make a pull please credit yourself/ im not a scum bag, maybe a lie
+ */
+
+
+
+
+
+
 namespace InfoBoard
 {
     [BepInPlugin(InfoBoard.Info.Guid, Name, InfoBoard.Info.Version)]
@@ -24,7 +39,8 @@ namespace InfoBoard
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor SILENCED
 #pragma warning disable CS0649 // Field is never assigned to SILENCED
 #pragma warning disable CS0169 // Field is never used SILENCED
-        public static Main Instance;
+        
+        public static Main Instance; // unused? idk
 // shyt Connection / Status
         private bool Connected = false;
         private bool allowed;
