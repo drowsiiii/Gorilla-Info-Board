@@ -1,25 +1,19 @@
 ﻿
-// before you look at this code, Huge props to Hansolo and Dount guy thing i forgor name for helping me a little
-// huge thanks for me skidding the trick of using the rig text for the font, thanks GorillaStats!
-// most code developed by drowsiii/vaeee 
-// any bugs you fix.. pull req
-// ingore the swears
-
 using System;
 using BepInEx;
 using UnityEngine;
 using static InfoBoard.Info;
 using System.IO;
 using System.Reflection;
-using GorillaLocomotion;
-using GorillaNetworking;
+using GorillaLocomotion; // tf
+using GorillaNetworking; // tf
 using Photon.Pun;
-using Photon.Pun.UtilityScripts;
+using Photon.Pun.UtilityScripts; // tf
 using TMPro;
-using UnityEngine.Animations.Rigging;
-using UnityEngine.UI;
+using UnityEngine.Animations.Rigging; // tf
+using UnityEngine.UI; // tf
 using UnityEngine.XR.Interaction.Toolkit;
-using Object = System.Object;
+using Object = System.Object; // tf
 
 namespace InfoBoard
 {
@@ -43,7 +37,7 @@ namespace InfoBoard
         private string Moddedlobby = "Modded";
 
 // shyt GameObjects
-        private GameObject RoomText = new GameObject("RoomText");
+        private GameObject RoomText = new GameObject("RoomText"); // ???
         private GameObject button;
         private GameObject newTextAboveButton;
 
@@ -345,14 +339,14 @@ namespace InfoBoard
 
         
 
-        private void Awake()
+        private void Awake() // start
         {
             GorillaTagger.OnPlayerSpawned(Init);
         }
 
 
 
-        private void Update()
+        private void Update() 
         {
             var calculationframes = 1f / Time.unscaledDeltaTime;
             var frames = makenotsobigbruh((int)calculationframes);
@@ -411,8 +405,7 @@ namespace InfoBoard
         void Init()
         {
             Instance = this;
-            // you on game start functions here
-            var bundle = LoadAssetBundle("InfoBoard.Assets.Boards.bundle"); // ty real vaee
+            var bundle = LoadAssetBundle("InfoBoard.Assets.Boards.bundle"); 
             if (bundle == null)
             {
                 Logger.LogError(
@@ -423,7 +416,7 @@ namespace InfoBoard
             var asset = bundle.LoadAsset<GameObject>("Board");
             if (asset == null)
             {
-                Logger.LogError("❌ Prefab 'Board' not found in bundle."); //  you
+                Logger.LogError("❌ Prefab 'Board' not found in bundle.");
                 return;
             }
 
@@ -442,7 +435,6 @@ namespace InfoBoard
             buttonObject.transform.localScale = new Vector3(0.25f, 0.05f, 0.05f);
             
             // Text Change Page
-            // Add this after your button creation code
             GameObject buttonLabel222 = new GameObject("ButtonLabel");
             TextMeshPro buttonText111 = buttonLabel222.AddComponent<TextMeshPro>();
             buttonText111.text = "Change Page";
@@ -463,78 +455,69 @@ namespace InfoBoard
             newTextAboveButton.transform.position = new Vector3(-64.225f, 12.4942f, -81.827f);
             newTextAboveButton.transform.localScale = new Vector3(0.16f, 0.16f, 0.16f);
             newTextAboveButton.transform.Rotate(0, 0, 0);
-            // Text
-            // edit pain in my ass
-            // Lil text guide for self (edit: )
-            /*
-              How to move board text up/down:
-              Middle Number in new Vector3(1st, middle, 3(DONT TOUCH LAST NUMBER))
-              Dont touch last number AT ALL
-              The first number is across/ sideways
-              Removeing numbers from first is im pretty sure is this way (<----)
-              And adding is (---->)
-
-             */
             GameObject Credits = new GameObject("Credits");
             CreditsTMP = Credits.AddComponent<TextMeshPro>();
 
+// ═══════════════════════════════════════════════════════════════════════════════
+// CREDITS 
+// ═══════════════════════════════════════════════════════════════════════════════ ohh yeah thanks font thingy website ah here https://www.symbolcopy.com/line-symbols.html
+
             CreditsTMP.text = 
                 "- CREDITS -\n" +
-                "════════════════════════════════════\n\n" +
+                "════════════════════════════════════════\n\n" +
                 "anonymous.hi - Discord\n" +
                 "----------------------------------------\n" +
                 "Massive thanks for all the help!\n" +
                 "• Current gamemode detection system\n" +
                 "• GorillaPressableButton implementation\n" +
                 "• General coding guidance & support\n\n" +
-
                 "drowsiii/vaeee - Developer\n" +
                 "----------------------------------------\n" +
                 "Main development & coding\n\n" +
-
-                "════════════════════════════════════\n" +
+                "════════════════════════════════════════\n" +
                 "Additional credits in source code comments";
-            CreditsTMP.font =
-                GorillaTagger.Instance.offlineVRRig.playerText1
-                    .font; // Straight up skidded from gorillastats tyy!, you should go get it, Sorry..
+
+            CreditsTMP.font = GorillaTagger.Instance.offlineVRRig.playerText1.font; 
             CreditsTMP.fontSize = 1.7f;
             CreditsTMP.color = Color.white;
             CreditsTMP.alignment = TextAlignmentOptions.Center;
-            Credits.transform.position =
-                new Vector3(-63.706f, 12.6942f, -81.827f); // -81.827f is flush to the board, i repeat dont change it
+            Credits.transform.position = new Vector3(-63.706f, 12.6942f, -81.827f); 
             Credits.transform.localScale = new Vector3(0.16f, 0.16f, 0.16f);
             Credits.transform.Rotate(0, 0, 0);
             CreditsTMP.enabled = false;
-            // Vector3 front4 = Pos + Board.transform.forward * 2.2f; // => (-67.706, 12.6442, -81.800) ty!! calc (This is wrong  me)
+
+            // ═══════════════════════════════════════════════════════════════════════════════
+            // MAIN TITLE
+            // ═══════════════════════════════════════════════════════════════════════════════
+
             GameObject label1 = new GameObject("TMP Text");
-            tmp = label1.AddComponent<TextMeshPro>(); // all i had to ducing tofccuckufck
+            tmp = label1.AddComponent<TextMeshPro>(); 
             tmp.text = "Gorilla Info Board v1.0.0";
-            tmp.font = GorillaTagger.Instance.offlineVRRig.playerText1
-                .font; // Straight up skidded from gorillastats tyy!, you should go get it, Sorry..
+            tmp.font = GorillaTagger.Instance.offlineVRRig.playerText1.font; 
             tmp.fontSize = 3;
             tmp.color = Color.white;
             tmp.alignment = TextAlignmentOptions.Center;
-            label1.transform.position =
-                new Vector3(-63.944f, 12.8541f, -81.827f); // -81.827f is flush to the board, i repeat dont change it
+            label1.transform.position = new Vector3(-63.944f, 12.8541f, -81.827f); 
             label1.transform.localScale = new Vector3(0.16f, 0.16f, 0.16f);
             label1.transform.Rotate(0, 0, 0);
-            // -------------------------
-            // Room shyt
-            // -------------------------
+
+            // ═══════════════════════════════════════════════════════════════════════════════
+            // ROOM INFORMATION 
+            // ═══════════════════════════════════════════════════════════════════════════════
+
+            // Room Heading
             GameObject RoomHeading = new GameObject("TMPRoomHeading");
-            RoomHeadingTMP = RoomHeading.AddComponent<TextMeshPro>(); // all i had to ducing tofccuckufck
+            RoomHeadingTMP = RoomHeading.AddComponent<TextMeshPro>(); 
             RoomHeadingTMP.text = "Room Info:";
-            RoomHeadingTMP.font =
-                GorillaTagger.Instance.offlineVRRig.playerText1
-                    .font; // Straight up skidded from gorillastats tyy!, you should go get it, Sorry..
+            RoomHeadingTMP.font = GorillaTagger.Instance.offlineVRRig.playerText1.font; 
             RoomHeadingTMP.fontSize = 2.3f;
             RoomHeadingTMP.color = Color.white;
             RoomHeadingTMP.alignment = TextAlignmentOptions.Center;
-            RoomHeading.transform.position =
-                new Vector3(-63.944f, 12.7541f, -81.827f); // -81.827f is flush to the board, i repeat dont change it
+            RoomHeading.transform.position = new Vector3(-63.944f, 12.7541f, -81.827f); 
             RoomHeading.transform.localScale = new Vector3(0.16f, 0.16f, 0.16f);
             RoomHeading.transform.Rotate(0, 0, 0);
-            // Second Text workies
+
+            // Room Status
             GameObject RoomText = new GameObject("RoomText");
             RoomTMP = RoomText.AddComponent<TextMeshPro>();
             RoomTMP.text = $"{Status}";
@@ -542,11 +525,11 @@ namespace InfoBoard
             RoomTMP.fontSize = 2;
             RoomTMP.color = Color.white;
             RoomTMP.alignment = TextAlignmentOptions.Center;
-            RoomText.transform.position =
-                new Vector3(-63.944f, 12.6541f, -81.827f); // -81.827f is flush to the board, i repeat dont change it
+            RoomText.transform.position = new Vector3(-63.944f, 12.6541f, -81.827f); 
             RoomText.transform.localScale = new Vector3(0.16f, 0.16f, 0.16f);
             RoomText.transform.Rotate(0, 0, 0);
-            // Ice Bug Photonnetwork thing i think edit fixed
+
+            // Max Players Display
             GameObject MaxPlayersText = new GameObject("PlayersText");
             MaxPlayers = MaxPlayersText.AddComponent<TextMeshPro>();
             MaxPlayers.text = $"{MaxPlayers1}";
@@ -554,10 +537,11 @@ namespace InfoBoard
             MaxPlayers.fontSize = 2;
             MaxPlayers.color = Color.white;
             MaxPlayers.alignment = TextAlignmentOptions.Center;
-            MaxPlayersText.transform.position =
-                new Vector3(-63.944f, 12.6141f, -81.827f); // -81.827f is flush to the board, i repeat dont change it
+            MaxPlayersText.transform.position = new Vector3(-63.944f, 12.6141f, -81.827f);
             MaxPlayersText.transform.localScale = new Vector3(0.16f, 0.16f, 0.16f);
             MaxPlayersText.transform.Rotate(0, 0, 0);
+
+            // Game Mode Display
             GameObject GameMode = new GameObject("Gamemodething");
             GamemodeTMP = GameMode.AddComponent<TextMeshPro>();
             GamemodeTMP.text = $"Gamemode: {Gamemodeis}";
@@ -565,59 +549,57 @@ namespace InfoBoard
             GamemodeTMP.fontSize = 2;
             GamemodeTMP.color = Color.white;
             GamemodeTMP.alignment = TextAlignmentOptions.Center;
-            GameMode.transform.position =
-                new Vector3(-63.944f, 12.5741f, -81.827f); // -81.827f is flush to the board, i repeat dont change it
+            GameMode.transform.position = new Vector3(-63.944f, 12.5741f, -81.827f); 
             GameMode.transform.localScale = new Vector3(0.16f, 0.16f, 0.16f);
             GameMode.transform.Rotate(0, 0, 0);
-            // -------------------------
-            // Player info!
-            // ------------------------- has ice bug?
-            string
-                  PlayerID = PhotonNetwork.LocalPlayer .UserId; // HOW THE  DOES THIS  THE    WORKKKK SOMEONE PLEASE TEACH ME THE ASSEMBLY
-            
 
+            // ═══════════════════════════════════════════════════════════════════════════════
+            // PLAYER INFORMATION 
+            // ═══════════════════════════════════════════════════════════════════════════════
 
+            string PlayerID = PhotonNetwork.LocalPlayer.UserId; 
 
-
+            // Player Info Heading
             GameObject PlayerInfoHeading = new GameObject("PlayerInfoHeading");
-            PlayerInfoHeadingTMP = PlayerInfoHeading.AddComponent<TextMeshPro>(); // all i had to ducing tofccuckufck
+            PlayerInfoHeadingTMP = PlayerInfoHeading.AddComponent<TextMeshPro>();
             PlayerInfoHeadingTMP.text = "Player Info:";
-            PlayerInfoHeadingTMP.font =
-                GorillaTagger.Instance.offlineVRRig.playerText1
-                    .font; // Straight up skidded from gorillastats tyy!, you should go get it, Sorry..
+            PlayerInfoHeadingTMP.font = GorillaTagger.Instance.offlineVRRig.playerText1.font; 
             PlayerInfoHeadingTMP.fontSize = 2f;
             PlayerInfoHeadingTMP.color = Color.white;
             PlayerInfoHeadingTMP.alignment = TextAlignmentOptions.Center;
-            PlayerInfoHeading.transform.position =
-                new Vector3(-63.400f, 12.7501f, -81.827f); // -81.827f is flush to the board, i repeat dont change it
+            PlayerInfoHeading.transform.position = new Vector3(-63.400f, 12.7501f, -81.827f); 
             PlayerInfoHeading.transform.localScale = new Vector3(0.16f, 0.16f, 0.16f);
             PlayerInfoHeading.transform.Rotate(0, 0, 0);
-            GameObject NahIdPlayerId = new GameObject("PlayerID"); // Ice bug
+
+            // Player ID Display
+            GameObject NahIdPlayerId = new GameObject("PlayerID"); 
             PlayeridTMP = NahIdPlayerId.AddComponent<TextMeshPro>();
             PlayeridTMP.text = "<color=#FF4444>Turn Speed:</color> " + PhotonNetwork.LocalPlayer.UserId;
             PlayeridTMP.font = GorillaTagger.Instance.offlineVRRig.playerText1.font;
             PlayeridTMP.fontSize = 2;
             PlayeridTMP.color = Color.white;
             PlayeridTMP.alignment = TextAlignmentOptions.Center;
-            NahIdPlayerId.transform.position =
-                new Vector3(-63.400f, 12.6541f, -81.827f); // -81.827f is flush to the board, i repeat dont change it
+            NahIdPlayerId.transform.position = new Vector3(-63.400f, 12.6541f, -81.827f); 
             NahIdPlayerId.transform.localScale = new Vector3(0.16f, 0.16f, 0.16f);
             NahIdPlayerId.transform.Rotate(0, 0, 0);
-            GameObject NahIdcolord = new GameObject("colorcode"); // Ice bug
+
+            // Color Code Display
+            GameObject NahIdcolord = new GameObject("colorcode"); 
             Playerid1TMP = NahIdcolord.AddComponent<TextMeshPro>();
-            Playerid1TMP.text = "no"; // dont work
+            Playerid1TMP.text = "no"; 
             Playerid1TMP.font = GorillaTagger.Instance.offlineVRRig.playerText1.font;
             Playerid1TMP.fontSize = 2;
             Playerid1TMP.color = Color.white;
             Playerid1TMP.alignment = TextAlignmentOptions.Center;
-            NahIdcolord.transform.position =
-                new Vector3(-63.400f, 12.6141f, -81.827f); // -81.827f is flush to the board, i repeat dont change it
+            NahIdcolord.transform.position = new Vector3(-63.400f, 12.6141f, -81.827f); 
             NahIdcolord.transform.localScale = new Vector3(0.16f, 0.16f, 0.16f);
             NahIdcolord.transform.Rotate(0, 0, 0);
 
-            // -------------------------
-            // Performance & Info
-            // -------------------------
+            // ═══════════════════════════════════════════════════════════════════════════════
+            // PERFORMANCE & INFO 
+            // ═══════════════════════════════════════════════════════════════════════════════
+
+            // Performance Heading
             GameObject Page3Heading = new GameObject("Page3Heading");
             Page3HeadingTMP = Page3Heading.AddComponent<TextMeshPro>();
             Page3HeadingTMP.text = "Performance & Other Info";
@@ -630,32 +612,33 @@ namespace InfoBoard
             Page3Heading.transform.Rotate(0, 0, 0);
             Page3HeadingTMP.enabled = false;
 
-
+            // FPS Counter
             GameObject FPSCounter = new GameObject("FPSCounter");
             FPSCounterTMP = FPSCounter.AddComponent<TextMeshPro>();
-                FPSCounterTMP.text = "FPS: 90";
-                    FPSCounterTMP.font = GorillaTagger.Instance.offlineVRRig.playerText1.font; // hiii :D
-                        FPSCounterTMP.fontSize = 2f;
-                    FPSCounterTMP.color = new Color(0.3f, 1f, 0.3f); 
-                FPSCounterTMP.alignment = TextAlignmentOptions.Center;
+            FPSCounterTMP.text = "FPS: 90";
+            FPSCounterTMP.font = GorillaTagger.Instance.offlineVRRig.playerText1.font; 
+            FPSCounterTMP.fontSize = 2f;
+            FPSCounterTMP.color = new Color(0.3f, 1f, 0.3f);
+            FPSCounterTMP.alignment = TextAlignmentOptions.Center;
             FPSCounter.transform.position = new Vector3(-63.706f, 12.6641f, -81.827f); 
             FPSCounter.transform.localScale = new Vector3(0.16f, 0.16f, 0.16f);
             FPSCounter.transform.Rotate(0, 0, 0);
             FPSCounterTMP.enabled = false;
 
+            // Ping Display
             GameObject PingDisplay = new GameObject("PingDisplay");
             PingDisplayTMP = PingDisplay.AddComponent<TextMeshPro>();
             PingDisplayTMP.text = "Ping: -- ms";
             PingDisplayTMP.font = GorillaTagger.Instance.offlineVRRig.playerText1.font;
             PingDisplayTMP.fontSize = 2f;
-            PingDisplayTMP.color = new Color(1f, 0.8f, 0.3f); 
+            PingDisplayTMP.color = new Color(1f, 0.8f, 0.3f);
             PingDisplayTMP.alignment = TextAlignmentOptions.Center;
             PingDisplay.transform.position = new Vector3(-63.706f, 12.7041f, -81.827f); 
             PingDisplay.transform.localScale = new Vector3(0.16f, 0.16f, 0.16f);
             PingDisplay.transform.Rotate(0, 0, 0);
             PingDisplayTMP.enabled = false;
 
-
+            // Session Time Display
             GameObject SessionTime = new GameObject("SessionTime");
             SessionTimeTMP = SessionTime.AddComponent<TextMeshPro>();
             SessionTimeTMP.text = "Session: 00:00";
@@ -667,23 +650,25 @@ namespace InfoBoard
             SessionTime.transform.localScale = new Vector3(0.16f, 0.16f, 0.16f);
             SessionTime.transform.Rotate(0, 0, 0);
             SessionTimeTMP.enabled = false;
-            
-            // New Text Under Session Time
+
+            // Cosmetics Counter
             GameObject gameObjectCosmeticsTMP = new GameObject("NewTextUnderSession"); 
             CosmeticsTMP = gameObjectCosmeticsTMP.AddComponent<TextMeshPro>();
-            CosmeticsTMP.text = "Cosmetics Amount: Error, Reload the mod?"; // Change
+            CosmeticsTMP.text = "Cosmetics Amount: Error, Reload the mod?";
             CosmeticsTMP.font = GorillaTagger.Instance.offlineVRRig.playerText1.font;
             CosmeticsTMP.fontSize = 2f;
-            CosmeticsTMP.color = new Color(1f, 0.5f, 0.8f); //
+            CosmeticsTMP.color = new Color(1f, 0.5f, 0.8f);
             CosmeticsTMP.alignment = TextAlignmentOptions.Center;
-            gameObjectCosmeticsTMP.transform.position = new Vector3(-63.706f, 12.5841f, -81.827f); // 0.04f
+            gameObjectCosmeticsTMP.transform.position = new Vector3(-63.706f, 12.5841f, -81.827f);
             gameObjectCosmeticsTMP.transform.localScale = new Vector3(0.16f, 0.16f, 0.16f);
             gameObjectCosmeticsTMP.transform.Rotate(0, 0, 0);
             CosmeticsTMP.enabled = false;
-            
-            // -------------------------
-//   - Player List
-// -------------------------
+
+            // ═══════════════════════════════════════════════════════════════════════════════
+            // PLAYER LIST 
+            // ═══════════════════════════════════════════════════════════════════════════════
+
+            // Player List Heading
             GameObject PlayerListHeading = new GameObject("PlayerListHeading");
             PlayerListHeadingTMP = PlayerListHeading.AddComponent<TextMeshPro>();
             PlayerListHeadingTMP.text = "Player List:";
@@ -696,6 +681,7 @@ namespace InfoBoard
             PlayerListHeading.transform.Rotate(0, 0, 0);
             PlayerListHeadingTMP.enabled = false;
 
+            // Player List Content
             GameObject PlayerList = new GameObject("PlayerList");
             PlayerListTMP = PlayerList.AddComponent<TextMeshPro>();
             PlayerListTMP.text = "Not in room";
@@ -703,14 +689,16 @@ namespace InfoBoard
             PlayerListTMP.fontSize = 1.6f;
             PlayerListTMP.color = Color.white;
             PlayerListTMP.alignment = TextAlignmentOptions.Center;
-            PlayerList.transform.position = new Vector3(-63.706f, 12.6541f, -81.827f); // Centered position
+            PlayerList.transform.position = new Vector3(-63.706f, 12.6541f, -81.827f); 
             PlayerList.transform.localScale = new Vector3(0.16f, 0.16f, 0.16f);
             PlayerList.transform.Rotate(0, 0, 0);
             PlayerListTMP.enabled = false;
-            
-            // -------------------------
-            // Installed Mods
-            // -------------------------
+
+            // ═══════════════════════════════════════════════════════════════════════════════
+            // INSTALLED MODS 
+            // ═══════════════════════════════════════════════════════════════════════════════
+
+            // Mods Heading
             GameObject ModsHeading = new GameObject("ModsHeading");
             ModsHeadingTMP = ModsHeading.AddComponent<TextMeshPro>();
             ModsHeadingTMP.text = "Installed Mods:";
@@ -722,18 +710,20 @@ namespace InfoBoard
             ModsHeading.transform.localScale = new Vector3(0.16f, 0.16f, 0.16f);
             ModsHeading.transform.Rotate(0, 0, 0);
             ModsHeadingTMP.enabled = false;
-            var GUIDS = BepInEx.Bootstrap.Chainloader.PluginInfos; // thnaks copoilt search i fcuking hate you but ty :D
+            
+            var GUIDS = BepInEx.Bootstrap.Chainloader.PluginInfos; // Get installed mods from blepy boy
             string guidstrings = "";
             foreach(var GUIDs in GUIDS.Values)
             {
                 guidstrings += $"\n {GUIDs}";
             }
-            // get installed GUIDS? ty google
+
+            // Mods List Display
             GameObject ModsList = new GameObject("ModsList");
             ModsListTMP = ModsList.AddComponent<TextMeshPro>();
             ModsListTMP.text = guidstrings;
             ModsListTMP.font = GorillaTagger.Instance.offlineVRRig.playerText1.font;
-            ModsListTMP.fontSize = 1.8f; // Smaller font for list
+            ModsListTMP.fontSize = 1.8f; 
             ModsListTMP.color = Color.white;
             ModsListTMP.alignment = TextAlignmentOptions.Center;
             ModsList.transform.position = new Vector3(-63.706f, 12.6241f, -81.827f);
@@ -746,22 +736,6 @@ namespace InfoBoard
             NetworkSystem.Instance.OnMultiplayerStarted += JoinedRoom;
             NetworkSystem.Instance.OnReturnedToSinglePlayer += OnLeaveRoom;
         }
-
-        
-        // #freeschelp
-        // 
-        /* private string GetGamemodeKey(string gamemodeString) // Credits to hansolo1000falcon for ebing the best and improving this and credits to Dount @anonymous.hi for being the best and making first avation code
-         { // should workies
-             if (gamemodeString.Contains("CASUAL")) return "CASUAL";
-             if (gamemodeString.Contains("INFECTION")) return "INFECTION";
-             if (gamemodeString.Contains("HUNT")) return "HUNT";
-             if (gamemodeString.Contains("Freeze")) return "FREEZE";
-             if (gamemodeString.Contains("PAINTBRAWL")) return "PAINTBRAWL";
-             if (gamemodeString.Contains("AMBUSH")) return "AMBUSH";
-             if (gamemodeString.Contains("GHOST")) return "GHOST";
-             if (gamemodeString.Contains("GUARDIAN")) return "GUARDIAN";
-             return gamemodeString; sorry hansolo your methord no work for my use */
-
         void FixedUpdate()
         {
             
@@ -770,7 +744,7 @@ namespace InfoBoard
             int g = Mathf.RoundToInt(playerColor.g * 9);
             int b = Mathf.RoundToInt(playerColor.b * 9);
 
-            Playerid1TMP.text = $"Color Code: {r}, {g}, {b}"; // maybbeee...
+            Playerid1TMP.text = $"Color Code: {r}, {g}, {b}"; 
             // Keep text  working 
             if (RoomTMP != null)
                 RoomTMP.text = Status;
@@ -783,12 +757,12 @@ namespace InfoBoard
 
             }
 
-            if (Connected) // welcome back old unc
+            if (Connected) 
             {
 
                 string gm = NetworkSystem.Instance.GameModeString.ToUpperInvariant();
 
-                if (gm.Contains("CASUAL"))          Gamemodeis = "Casual"; // ty hansolo! realised i dont need {}
+                if (gm.Contains("CASUAL"))          Gamemodeis = "Casual"; 
                 else if (gm.Contains("INFECTION"))  Gamemodeis = "Infection";
                 else if (gm.Contains("HUNT"))       Gamemodeis = "Hunt";
                 else if (gm.Contains("FREEZE"))     Gamemodeis = "Freeze Tag";
@@ -823,10 +797,10 @@ namespace InfoBoard
                 int playerCount = PhotonNetwork.CurrentRoom.PlayerCount;
                 MaxPlayers1 = playerCount + " / 10";
                 MaxPlayers.text = MaxPlayers1;
-                string PlayerListfrthistime = ""; // fuck
-                foreach (var player in PhotonNetwork.PlayerList) // improve
+                string PlayerListfrthistime = ""; 
+                foreach (var player in PhotonNetwork.PlayerList) 
                 {
-                    PlayerListfrthistime += $"\n Name: {player.NickName} | {player.ActorNumber}"; // this is shit
+                    PlayerListfrthistime += $"\n Name: {player.NickName} | {player.ActorNumber}"; 
                 }
                 PlayerListTMP.text = PlayerListfrthistime;
             }
@@ -859,7 +833,7 @@ namespace InfoBoard
         }
     }
 
-    internal class ButtonPageChanger : GorillaPressableButton // Anomynous Told this was from the maker of holdable pad! Thanks E10O!  and Anomynous
+    internal class ButtonPageChanger : GorillaPressableButton // IT WAS WHITE??
     {
         public override void Start()
         {
