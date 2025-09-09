@@ -24,7 +24,8 @@ A comprehensive information display mod for Gorilla Tag that shows real-time gam
   - Modded lobby detection
 - **Player Info**: Your TurnSpeed and color code
 
-<img width="1026" height="445" alt="image" src="https://github.com/user-attachments/assets/a756c070-0e32-45db-bad7-2ff407db480a" />
+<img width="1061" height="465" alt="image" src="https://github.com/user-attachments/assets/dd306566-f824-4c75-90b8-b2b2ff3465a8" />
+
 
 
 ### 🔧 **Installed Mods (Page 2)**
@@ -48,7 +49,8 @@ A comprehensive information display mod for Gorilla Tag that shows real-time gam
 - Complete list of all players in the current room
 - Updates automatically when players join/leave
 
-<img width="1045" height="431" alt="image" src="https://github.com/user-attachments/assets/e7caa38b-7a22-42f9-9f07-252e83d0de60" />
+<img width="1038" height="462" alt="image" src="https://github.com/user-attachments/assets/ad8afffa-a1fc-40f4-90a7-b43a23035f40" />
+
 
 
 ### 🏆 **Credits (Page 5)**
@@ -101,4 +103,5 @@ Contributions are welcome and wanted! Please:
 **⚠️ Disclaimer**: This is a community-created mod and is not officially supported by Another Axiom. Use at your own risk and always follow the game's terms of service.
 
 # This product is not affiliated with Gorilla Tag or Another Axiom LLC and is not endorsed or otherwise sponsored by Another Axiom LLC. Portions of the materials contained herein are property of Another Axiom LLC. © 2021 Another Axiom LLC.
+
 
