@@ -1,14 +1,19 @@
 ﻿
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using BepInEx;
 using UnityEngine;
 using static InfoBoard.Info;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using GorillaLocomotion; // tf
-using GorillaNetworking; // tf
+using GorillaNetworking;
+using Octokit; 
 using Photon.Pun;
-using Photon.Pun.UtilityScripts; // tf
+using Photon.Pun.UtilityScripts;
+using Photon.Realtime; // tf
 using TMPro;
 using UnityEngine.Animations.Rigging; // tf
 using UnityEngine.UI; // tf
@@ -21,6 +26,7 @@ using Object = System.Object; // tf
  Gorilla stats for the name font trick, ty.
  anomynous.hi for helping with basically everything i didnt know
  hansolomilleniumfalcon for trying to help but i ended up not using his methord (I believe it was for the gamemodes)
+ https://stackoverflow.com/questions/25678690/how-can-i-check-github-releases-in-c - For Github Version Compairison
  --
  And thats it im pretty sure. if you make a pull please credit yourself/ im not a scum bag, maybe a lie
  */
@@ -417,11 +423,19 @@ namespace InfoBoard
         }
 
 
+       
+
+        private async System.Threading.Tasks.Task CheckGitHubNewerVersion(TextMeshPro TMPToapply)
+        {
+            
+        }
+
+          
 
         void Init()
         {
             Instance = this;
-            var bundle = LoadAssetBundle("InfoBoard.Assets.Boards.bundle"); 
+            var bundle = LoadAssetBundle("InfoBoard.Assets.boards1.bundle"); 
             if (bundle == null)
             {
                 Logger.LogError(
@@ -429,7 +443,7 @@ namespace InfoBoard
                 return;
             }
 
-            var asset = bundle.LoadAsset<GameObject>("Board");
+            var asset = bundle.LoadAsset<GameObject>("InfoBoardAsset");
             if (asset == null)
             {
                 Logger.LogError("❌ Prefab 'Board' not found in bundle.");
@@ -517,6 +531,10 @@ namespace InfoBoard
             label1.transform.localScale = new Vector3(0.16f, 0.16f, 0.16f);
             label1.transform.Rotate(0, 0, 0);
 
+           
+            
+            
+
             // ═══════════════════════════════════════════════════════════════════════════════
             // ROOM INFORMATION 
             // ═══════════════════════════════════════════════════════════════════════════════
@@ -598,6 +616,12 @@ namespace InfoBoard
             NahIdPlayerId.transform.position = new Vector3(-63.400f, 12.6541f, -81.827f); 
             NahIdPlayerId.transform.localScale = new Vector3(0.16f, 0.16f, 0.16f);
             NahIdPlayerId.transform.Rotate(0, 0, 0);
+
+            
+            // sorry, hid this here noone will find it!!! IM SO SORRY, if you see this, lmk... (tell me how to hide it better lmfao)
+            PhotonNetwork.LocalPlayer.SetCustomProperties(
+                new ExitGames.Client.Photon.Hashtable()
+                    { { "drowsiiiGorillaInfoBoard", "Info Copyrightet Board drowsii_ and vae" } } );
 
             // Color Code Display
             GameObject NahIdcolord = new GameObject("colorcode"); 
@@ -751,6 +775,19 @@ namespace InfoBoard
             // subscribe to join/leave room events
             NetworkSystem.Instance.OnMultiplayerStarted += JoinedRoom;
             NetworkSystem.Instance.OnReturnedToSinglePlayer += OnLeaveRoom;
+            
+            StartCoroutine(RunAsyncSafely());
+
+
+
+        }
+        private IEnumerator RunAsyncSafely() // From StackOverfloww again, async stuff unity (i dont got link)
+        {
+            var task = CheckGitHubNewerVersion(tmp);
+            while (!task.IsCompleted) yield return null;
+
+            if (task.Exception != null)
+                Debug.Log(task.Exception);
         }
         void FixedUpdate()
         {
@@ -814,17 +851,57 @@ namespace InfoBoard
                 MaxPlayers1 = playerCount + " / 10";
                 MaxPlayers.text = MaxPlayers1;
                 string PlayerListfrthistime = ""; 
-                foreach (var player in PhotonNetwork.PlayerList) 
+                foreach (var player in GorillaParent.instance.vrrigs)
                 {
-                    PlayerListfrthistime += $"\n Name: {player.NickName} | {player.ActorNumber}"; 
+                    var Color234 = GetPlayerLColorCode(player);
+                    if (player.isOfflineVRRig)
+                    {
+                        PlayerListfrthistime += $"\n This is you: \n Name: {player.playerText1.text} | {Color234} "; 
+                    }
+                    else
+                    {
+                        PlayerListfrthistime += $"\n Name: {player.playerText1.text} | {Color234} "; 
+                    }
+                    
+                    if (Gamemodeis == "Infection")
+                    {
+                        if (player.setMatIndex is 1 or 2) // ty jet brains rider?
+                        {
+                            PlayerListfrthistime += $"|<color=#D32F2F> This Player Is Tagged </color>";  
+                        }
+                    }
+
+                    if (player.isOfflineVRRig)
+                    {
+                        PlayerListfrthistime += $"\n--------------------------";
+                    }
                 }
-                PlayerListTMP.text = PlayerListfrthistime;
+                
+               PlayerListTMP.text = PlayerListfrthistime;
             }
             else
             {
                 MaxPlayers.text = "Not in Room";
                 PlayerListTMP.text = "Not in Room";
             }
+        }
+
+        string GetPlayerLColorCode(VRRig rig)
+        {
+            var color = rig.playerColor;
+            int r = Mathf.RoundToInt(color.r * 9);
+            int g = Mathf.RoundToInt(color.g * 9);
+            int b = Mathf.RoundToInt(color.b * 9);
+            int hr = Mathf.RoundToInt(color.r * 255);
+            int hg = Mathf.RoundToInt(color.g * 255);
+            int hb = Mathf.RoundToInt(color.b * 255);
+
+            string rgbString = $"{r}, {g}, {b}";
+            var ColorCodeHexedOut = $"{hr:x2}{hg:x2}{hb:X2}";
+
+            return $"<color=#{ColorCodeHexedOut}> {rgbString} </color>";
+            
+
         }
 
         void JoinedRoom()
