@@ -51,19 +51,6 @@ And Player Info: Turn Speed and color
 • 	Credits page go look ingame!
 -----------
 
-Installation
-Requirements
-• 	Gorilla Tag (no s---) ((someone made a joke about this so ill keep it))
-• 	BepInEx
-Steps
-1. 	Download the latest release from the Releases page.
-2. 	Drop the files into your plugins folder.
-3. 	Start Gorilla Tag.
-
-Usage
-• 	The board spawns in the main lobby area.
-• 	Switch between pages using the button called "Change page" (ya think).
-
 
 Credits
 get the mod, or check the src at the top or scattered about
@@ -81,6 +68,7 @@ This project is licensed under the GPL‑3.0 License. See the LICENSE file for d
 **⚠️ Disclaimer**: This is a community-created mod and is not officially supported by Another Axiom. Use at your own risk and always follow the game's terms of service.
 
 # This product is not affiliated with Gorilla Tag or Another Axiom LLC and is not endorsed or otherwise sponsored by Another Axiom LLC. Portions of the materials contained herein are property of Another Axiom LLC. © 2021 Another Axiom LLC.
+
 
 
 
