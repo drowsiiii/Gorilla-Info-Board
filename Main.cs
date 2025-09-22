@@ -15,7 +15,8 @@ using Photon.Pun;
 using Photon.Pun.UtilityScripts;
 using Photon.Realtime; // tf
 using TMPro;
-using UnityEngine.Animations.Rigging; // tf
+using UnityEngine.Animations.Rigging;
+using UnityEngine.Networking; // tf
 using UnityEngine.UI; // tf
 using UnityEngine.XR.Interaction.Toolkit;
 using Object = System.Object; // tf
@@ -83,6 +84,7 @@ namespace InfoBoard
         private TextMeshPro PlayerListTMP;
         private TextMeshPro ModsHeadingTMP;
         private TextMeshPro ModsListTMP;
+        private TextMeshPro VersionTMP;
         
 // shyt fucking lovign Page system
         private int MaxPages = 5; 
@@ -425,9 +427,33 @@ namespace InfoBoard
 
        
 
-        private async System.Threading.Tasks.Task CheckGitHubNewerVersion(TextMeshPro TMPToapply)
+        private async System.Threading.Tasks.Task CheckGitHubNewerVersion(TextMeshPro TMPToapply) 
         {
-            
+            var web = UnityWebRequest.Get(@"https://raw.githubusercontent.com/drowsiiii/Gorilla-Info-Board/refs/heads/main/Assets/ver.txt").SendWebRequest();
+            await web;
+
+            if (web.webRequest.result == UnityWebRequest.Result.Success)
+            {
+                // latestex (joke latex)
+                var LatestVersionNum =  web.webRequest.downloadHandler.text;
+                var verConverted = new Version(LatestVersionNum);
+                // localver
+                var LocalVer = InfoBoard.Info.Version;
+                Version verLocalConverted = new Version(LocalVer);
+
+                if (verConverted > verLocalConverted) // Outdated
+                {
+                    TMPToapply.text = $"<color=red>Gorilla Info Board Needs A Update \n</color> You can use Info-Board for now, please update soon.\nCurrent Version: {LocalVer} → Latest: {LatestVersionNum}";
+                }
+                else if (verConverted == verLocalConverted) // Up to date
+                {
+                    TMPToapply.text = $"Gorilla Info Board is up to date. \nYou're running the latest version: {LocalVer}";
+                }
+                else // Beta
+                {
+                    TMPToapply.text = $"<color=yellow><b>You're using a beta version of Gorilla Info Board.</b></color>\nCurrent Version: {LocalVer} → Latest Stable: {LatestVersionNum}";
+                }
+            }
         }
 
           
@@ -477,9 +503,9 @@ namespace InfoBoard
             buttonLabel222.transform.Rotate(0, 0, 0);
 
             newTextAboveButton = new GameObject("TextAboveButton"); newTextTMP = newTextAboveButton.AddComponent<TextMeshPro>();
-            newTextTMP.text = "Current Page = 1"; // Change this to whatever you want to display
+            newTextTMP.text = "Current Page = 1";
             newTextTMP.font = GorillaTagger.Instance.offlineVRRig.playerText1.font;
-            newTextTMP.fontSize = 1.7f; // Slightly smaller than headings but bigger than regular text
+            newTextTMP.fontSize = 1.7f; 
             newTextTMP.color = new Color(200/255f, 170/255f, 220/255f);
             newTextTMP.alignment = TextAlignmentOptions.Center;
             newTextAboveButton.transform.position = new Vector3(-64.225f, 12.4942f, -81.827f);
@@ -508,7 +534,7 @@ namespace InfoBoard
                 "Additional credits in source code comments";
 
             CreditsTMP.font = GorillaTagger.Instance.offlineVRRig.playerText1.font; 
-            CreditsTMP.fontSize = 1.7f;
+            CreditsTMP.fontSize = 1.5f;
             CreditsTMP.color = Color.white;
             CreditsTMP.alignment = TextAlignmentOptions.Center;
             Credits.transform.position = new Vector3(-63.706f, 12.6942f, -81.827f); 
@@ -530,7 +556,21 @@ namespace InfoBoard
             label1.transform.position = new Vector3(-63.944f, 12.8541f, -81.827f); 
             label1.transform.localScale = new Vector3(0.16f, 0.16f, 0.16f);
             label1.transform.Rotate(0, 0, 0);
+            
+            GameObject Verison = new GameObject("TMPVersion");
+            VersionTMP = Verison.AddComponent<TextMeshPro>(); 
+            VersionTMP.text = "Waiting...";
+            VersionTMP.font = GorillaTagger.Instance.offlineVRRig.playerText1.font; 
+            VersionTMP.fontSize = 1.2f;
+            VersionTMP.color = Color.white;
+            VersionTMP.alignment = TextAlignmentOptions.Center;
+            Verison.transform.position = new Vector3(-63.600f,  12.442f, -81.827f); 
+            Verison.transform.localScale = new Vector3(0.16f, 0.16f, 0.16f);
+            Verison.transform.Rotate(0, 0, 0);
 
+
+
+            
            
             
             
@@ -716,7 +756,7 @@ namespace InfoBoard
             PlayerListHeadingTMP.fontSize = 2.3f;
             PlayerListHeadingTMP.color = Color.white;
             PlayerListHeadingTMP.alignment = TextAlignmentOptions.Center;
-            PlayerListHeading.transform.position = new Vector3(-63.706f, 12.8041f, -81.827f); 
+            PlayerListHeading.transform.position = new Vector3(-63.706f, 12.8245f, -81.827f); 
             PlayerListHeading.transform.localScale = new Vector3(0.16f, 0.16f, 0.16f);
             PlayerListHeading.transform.Rotate(0, 0, 0);
             PlayerListHeadingTMP.enabled = false;
@@ -726,7 +766,7 @@ namespace InfoBoard
             PlayerListTMP = PlayerList.AddComponent<TextMeshPro>();
             PlayerListTMP.text = "Not in room";
             PlayerListTMP.font = GorillaTagger.Instance.offlineVRRig.playerText1.font;
-            PlayerListTMP.fontSize = 1.6f;
+            PlayerListTMP.fontSize = 1.5f;
             PlayerListTMP.color = Color.white;
             PlayerListTMP.alignment = TextAlignmentOptions.Center;
             PlayerList.transform.position = new Vector3(-63.706f, 12.6541f, -81.827f); 
@@ -783,7 +823,7 @@ namespace InfoBoard
         }
         private IEnumerator RunAsyncSafely() // From StackOverfloww again, async stuff unity (i dont got link)
         {
-            var task = CheckGitHubNewerVersion(tmp);
+            var task = CheckGitHubNewerVersion(VersionTMP);
             while (!task.IsCompleted) yield return null;
 
             if (task.Exception != null)
