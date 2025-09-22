@@ -46,8 +46,7 @@ Gorilla Info Board is a pretty in‑game board for Gorilla Tag that shows useful
 
 # • 	Player list: name, color code, if in infection then if they are tagged it will say "This player is tagged" next to there name
 
-<img width="598" height="261" alt="Screenshot 2025-09-22 214504" src="https://github.com/user-attachments/assets/824834f9-b6c3-44af-b3f7-4f7a7a448e43" />
-
+<img width="598" height="261" alt="Screenshot 2025-09-22 214504" src="https://github.com/user-attachments/assets/824834f9-b6c3-44af-b3f7-4f7a7a448e43" /> Infection: <img width="559" height="250" alt="image" src="https://github.com/user-attachments/assets/555c3240-8239-47fe-905b-7687b91959e9" />
 • 	Credits page go look ingame!
 -----------
 
@@ -68,6 +67,7 @@ This project is licensed under the GPL‑3.0 License. See the LICENSE file for d
 **⚠️ Disclaimer**: This is a community-created mod and is not officially supported by Another Axiom. Use at your own risk and always follow the game's terms of service.
 
 # This product is not affiliated with Gorilla Tag or Another Axiom LLC and is not endorsed or otherwise sponsored by Another Axiom LLC. Portions of the materials contained herein are property of Another Axiom LLC. © 2021 Another Axiom LLC.
+
 
 
 
