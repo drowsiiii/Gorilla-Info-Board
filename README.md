@@ -33,15 +33,15 @@ Gorilla Info Board is a pretty in‑game board for Gorilla Tag that shows useful
 # • 	Room info: room code, player count, gamemod 
 # And Player Info: Turn Speed and color
 
-<img width="1176" height="484" alt="Screenshot 2025-09-22 214442" src="https://github.com/user-attachments/assets/eaf74c45-4132-4a9b-a77d-156547537580" />
+<img width="588" height="242" alt="Screenshot 2025-09-22 214442" src="https://github.com/user-attachments/assets/eaf74c45-4132-4a9b-a77d-156547537580" />
 
 # • 	Your Installed mods: auto‑detected from BepInEx which is more reliable
 
-<img width="1204" height="513" alt="Screenshot 2025-09-22 214451" src="https://github.com/user-attachments/assets/23d8e875-66a4-43c9-83bb-6854c1e732d1" />
+<img width="588" height="242" alt="Screenshot 2025-09-22 214442" src="https://github.com/user-attachments/assets/eaf74c45-4132-4a9b-a77d-156547537580" />
 
 # • 	Performance: FPS, ping, session timer, cosmetics you own!
 
-<img width="1199" height="520" alt="Screenshot 2025-09-22 214457" src="https://github.com/user-attachments/assets/70f16d3a-aeab-4916-8a27-e054cdbe2980" />
+<img width="600" height="260" alt="Screenshot 2025-09-22 214457" src="https://github.com/user-attachments/assets/70f16d3a-aeab-4916-8a27-e054cdbe2980" />
 
 
 # • 	Player list: name, color code, if in infection then if they are tagged it will say "This player is tagged" next to there name
@@ -68,6 +68,7 @@ This project is licensed under the GPL‑3.0 License. See the LICENSE file for d
 **⚠️ Disclaimer**: This is a community-created mod and is not officially supported by Another Axiom. Use at your own risk and always follow the game's terms of service.
 
 # This product is not affiliated with Gorilla Tag or Another Axiom LLC and is not endorsed or otherwise sponsored by Another Axiom LLC. Portions of the materials contained herein are property of Another Axiom LLC. © 2021 Another Axiom LLC.
+
 
 
 
