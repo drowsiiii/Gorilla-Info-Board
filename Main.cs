@@ -27,7 +27,6 @@ using Object = System.Object; // tf
  Gorilla stats for the name font trick, ty.
  anomynous.hi for helping with basically everything i didnt know
  hansolomilleniumfalcon for trying to help but i ended up not using his methord (I believe it was for the gamemodes)
- https://stackoverflow.com/questions/25678690/how-can-i-check-github-releases-in-c - For Github Version Compairison
  --
  And thats it im pretty sure. if you make a pull please credit yourself/ im not a scum bag, maybe a lie
  */
@@ -981,4 +980,5 @@ namespace InfoBoard
     }
 }
  
+
 
